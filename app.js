@@ -25,12 +25,36 @@ app.get("/articles", async (req, res) => {
     try {
         const foundArticles = await Article.find({});
         res.send(foundArticles);
-        console.log(foundArticles);
     } catch (err) {
         console.log(err);
     }
 });
 
+app.post("/articles", async (req, res) => {
+    try {
+        const newArticle = new Article({
+            title: req.body.title,
+            content: req.body.content
+        });
+        newArticle.save().then(savedDoc => {
+            savedDoc === newArticle;
+        });
+        res.send("Successfully added!")
+    } catch (err) {
+        res.send(err);
+    }
+})
+
+app.delete("/articles", async (req, res) => {
+    try {
+        response = await Article.deleteMany()
+        if (response.ok == 1) {
+            res.send("Successfully deleted all articles.")
+        }
+    } catch (err) {
+        res.send(err);
+    }
+});
 
 app.listen(3000, function() {
     console.log("Server on port 3000");
