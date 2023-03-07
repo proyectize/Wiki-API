@@ -48,9 +48,7 @@ app.post("/articles", async (req, res) => {
 app.delete("/articles", async (req, res) => {
     try {
         response = await Article.deleteMany()
-        if (response.ok == 1) {
-            res.send("Successfully deleted all articles.")
-        }
+        res.send("Successfully deleted all articles.")
     } catch (err) {
         res.send(err);
     }
